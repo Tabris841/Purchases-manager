@@ -1,0 +1,25 @@
+{
+  "name": "Purchases",
+  "version": "1.0.0",
+  "authors": [
+    "Anton Todorov"
+  ],
+  "description": "Purchases Manager",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.6",
+    "angular-ui-router": "ui-router#~0.2.15",
+    "bootstrap": "~3.3.5",
+    "restangular": "~1.5.1"
+  }
+}
