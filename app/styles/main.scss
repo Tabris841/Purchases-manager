@@ -1,0 +1,21 @@
+#mainDiv {
+  border: 1px solid black;
+}
+
+aside {
+  ul {
+    li {
+      list-style-type: none;
+    }
+  }
+}
+
+#addPurchase {
+  position: absolute;
+  top:5px;
+  right: 20px;
+}
+
+footer {
+  text-align: center;
+}

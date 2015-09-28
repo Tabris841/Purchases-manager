@@ -3,58 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Purchases</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="scripts/angular.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="scripts/ui-bootstrap-tpls-0.13.4.js"></script>
-    <script src="scripts/restangular.js"></script>
-    <script src="scripts/ui-bootstrap-tpls-0.13.4.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bundle.js"></script>
 </head>
-<body ng-app>
-<div>
-    <h1>Purchases</h1>
-
-    <aside>
-        <h3>Purchases by Day</h3>
-        <ul>
-            <li><a href="">Monday</a></li>
-            <li><a href="">Tuesday</a></li>
-            <li><a href="">Wendnesday</a></li>
-            <li><a href="">Thursday</a></li>
-            <li><a href="">Friday</a></li>
-            <li><a href="">Saturday</a></li>
-            <li><a href="">Sunday</a></li>
-        </ul>
-    </aside>
-    <section>
-        <div id="headerSection">
-            <h3>Tuesday Purchases</h3>
-            <a href="">Add Purchase</a>
-        </div>
-        <div id="mainSection">
-            <table>
-                <thead>
-                <tr>
-                    <th>Purchase Name</th>
-                    <th>Store Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Batteries</td>
-                    <td>Walmart</td>
-                    <td>Lorem ipsum sit amet</td>
-                    <td>9.99</td>
-                    <td>
-                        <button>Delete</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+<body ng-app="purchasesApp">
+<div class="container" ng-controller="purchasesCtrl">
+    <nav class="navbar">
+        <h3>Purchases {{message.price}} {{opa}}</h3>
+    </nav>
+    <div id="mainDiv" class="container">
+        <aside class="col-md-2 sidebar">
+            <h4>Purchases by Day</h4>
+            <ul class="list-group">
+                <li ng-repeat="day in days"><a ui-sref="{{day.day}}" class="list-group-item">{{day.day}}</a></li>
+            </ul>
+        </aside>
+        <section class="col-md-10 main">
+            <nav>
+                <h4>Tuesday Purchases</h4>
+                <a href="" class="btn btn-primary" id="addPurchase">Add Purchase</a>
+            </nav>
+            <div ui-view>
+            </div>
+        </section>
+    </div>
 </div>
 <footer>
     <p>Copyright2013 Henry Schein Solutions | All Rights Reserved</p>
