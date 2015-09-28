@@ -21,7 +21,7 @@
                 templateUrl: "table.html",
                 resolve: {
                     title: function () {
-                        return {value: 'simple!'}
+                        return {value: 'simple!'};
                     }
                 }
             })

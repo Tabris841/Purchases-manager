@@ -1,4 +1,3 @@
-
 // Dependicies
 var restful = require('node-restful');
 
@@ -6,7 +5,7 @@ var restful = require('node-restful');
 module.exports = function(app, route) {
 
     // Set the controller for REST
-    var rest = restful.model('purchase', app.models.purchase).methods(['get','put','post','delete']);
+    var rest = restful.model('day', app.models.day).methods(['get','put','post','delete']);
 
     // Register the endpoint
     rest.register(app, route);

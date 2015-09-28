@@ -22,8 +22,12 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.use('/hello', function(req, res, next){
+    res.send('Hello World!');
+});
+
 // MongoDB
-mongoose.connect('mongodb://admin:admin@ds059672.mongolab.com:59672/purchasesdb');
+mongoose.connect('mongodb://admin:1234@ds051923.mongolab.com:51923/purchases');
 mongoose.connection.once('open', function() {
 
     // Load models.
