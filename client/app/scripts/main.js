@@ -11,17 +11,34 @@
 
     purchasesApp.config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
         RestangularProvider.setBaseUrl('http://localhost:9001');
+        RestangularProvider.setRestangularFields({
+            id: "_id"
+        });
 
         $urlRouterProvider.otherwise("/monday");
+
 
         $stateProvider
             .state('Monday', {
                 url: "/Monday",
-                templateUrl: "table.html",
+                templateUrl: "views/table.html",
                 controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;
-                        $scope.purchases = $scope.days[0].purchases;         
+                        $scope.purchases = $scope.days[0].purchases;
+                        $scope.id = $scope.days[0]._id;
+                        console.log($scope.id);
+                        console.log($scope.purchases);
+                        $scope.newPurchases = {};
+                        Restangular.one('days');
+                        $scope.savePurchase = function() {
+                            Restangular.all('days/' + $scope.id);
+                            $scope.days[0].purchases.push($scope.newPurchases);
+
+                            $scope.day[0].save();
+                            // Restangular.all('days/_id').save($scope.days[0]);
+                            console.log($scope.days[0]);
+                        };
                     });
                 }
             })
@@ -31,9 +48,9 @@
                 controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;
-                        $scope.purchases = $scope.days[1].purchases;         
+                        $scope.purchases = $scope.days[1].purchases;
                     });
-                }           
+                }
             })
             .state('Wednesday', {
                 url: "/Wednesday",
@@ -41,7 +58,7 @@
                 controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;
-                        $scope.purchases = $scope.days[2].purchases;         
+                        $scope.purchases = $scope.days[2].purchases;
                     });
                 }
             })
@@ -51,7 +68,7 @@
                 controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;
-                        $scope.purchases = $scope.days[3].purchases;         
+                        $scope.purchases = $scope.days[3].purchases;
                     });
                 }
             })
@@ -61,7 +78,7 @@
                 controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;
-                        $scope.purchases = $scope.days[4].purchases;         
+                        $scope.purchases = $scope.days[4].purchases;
                     });
                 }
             })
@@ -71,26 +88,34 @@
                 controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;
-                        $scope.purchases = $scope.days[5].purchases;         
+                        $scope.purchases = $scope.days[5].purchases;
                     });
                 }
             })
             .state('Sunday', {
                 url: "/Sunday",
-                templateUrl: "table.html",controller: function($scope, Restangular) {
+                templateUrl: "table.html",
+                controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;
-                        $scope.purchases = $scope.days[6].purchases;         
+                        $scope.purchases = $scope.days[6].purchases;
                     });
                 }
             });
 
     });
 
+
     purchasesApp.controller('purchasesCtrl', function($scope, Restangular) {
         Restangular.all('days').getList().then(function(data) {
             $scope.days = data;
-        });
+        });        
     });
+
+    // purchasesApp.factory('Purchase', [Restangular, function(Restangular){
+    //     return {
+    //         days : Restangular.all().getList()
+    //     };
+    // }]);
 
 }());

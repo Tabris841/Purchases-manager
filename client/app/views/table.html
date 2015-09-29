@@ -1,21 +1,52 @@
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Purchase Name</th>
-        <th>Store Name</th>
-        <th>Description</th>
-        <th>Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="purchase in purchases">
-        <td>{{purchase.name}}</td>
-        <td>{{purchase.store}}</td>
-        <td>{{pruchase.description}}</td>
-        <td>{{purchase.price}}</td>
-        <td>
-            <button class="btn btn-default">Delete</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<nav>
+    <h4>Tuesday Purchases</h4>
+    <a href="" class="btn btn-primary" id="addPurchase" data-toggle="modal" data-target="#myModal">Add Purchase</a>
+</nav>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Purchase Name</th>
+                <th>Store Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="purchase in purchases">
+                <td>{{purchase.name}}</td>
+                <td>{{purchase.store}}</td>
+                <td>{{pruchase.description}}</td>
+                <td>{{purchase.price}}</td>
+                <td>
+                    <button class="btn btn-default">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Purchase</h4>
+            </div>
+            <div class="modal-body">
+                <label for="purchaseName">Purchase Name</label>
+                <input type="text" id="purchaseName" placeholder="Enter purchase name" ng-model="newPurchases.name" />
+                <label for="storeName">Store Name</label>
+                <input type="text" id="storeName" placeholder="Enter store name" ng-model="newPurchases.store" />
+                <label for="price">Price</label>
+                <input type="text" id="price" placeholder="0.00" ng-model="newPurchases.price" />
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="30" rows="10" ng-model="newPurchase.description"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="savePurchase()">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

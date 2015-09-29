@@ -26,14 +26,8 @@
                 <li ng-repeat="day in days"><a ui-sref="{{day.day}}" class="list-group-item">{{day.day}}</a></li>
             </ul>
         </aside>
-        <section class="col-md-10 main">
-            <nav>
-                <h4>Tuesday Purchases</h4>
-                <a href="" class="btn btn-primary" id="addPurchase">Add Purchase</a>
-            </nav>
-            <div ui-view>
-            </div>
-        </section>
+        <section class="col-md-10 main" ui-view>                      
+        </section>        
     </div>
 </div>
 <footer>
