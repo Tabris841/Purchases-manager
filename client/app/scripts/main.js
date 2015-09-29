@@ -32,19 +32,24 @@
                         $scope.newPurchases = {};
                         Restangular.one('days');
                         $scope.savePurchase = function() {
-                            Restangular.all('days/' + $scope.id);
-                            $scope.days[0].purchases.push($scope.newPurchases);
+                            //Restangular.all('days/' + $scope.id);
+                             $scope.days[0].purchases.push($scope.newPurchases);
+                            console.log($scope.days[0].purchases);
+                            //$scope.days[0].purchases.save();
+                            Restangular.copy($scope.days[0]).save();
 
-                            $scope.day[0].save();
-                            // Restangular.all('days/_id').save($scope.days[0]);
-                            console.log($scope.days[0]);
                         };
+                        $scope.deletePurchase = function () {
+                            $scope.days[0].purchases.splice(($scope.id), 1);
+                            console.log($scope.days[0].purchases);
+                            Restangular.copy($scope.days[0]).remove();
+                        }
                     });
                 }
             })
             .state('Tuesday', {
                 url: "/Tuesday",
-                templateUrl: "table.html",
+                templateUrl: "views/table.html",
                 controller: function($scope, Restangular) {
                     Restangular.all('days').getList().then(function(data) {
                         $scope.days = data;

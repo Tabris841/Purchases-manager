@@ -16,10 +16,10 @@
             <tr ng-repeat="purchase in purchases">
                 <td>{{purchase.name}}</td>
                 <td>{{purchase.store}}</td>
-                <td>{{pruchase.description}}</td>
+                <td>{{purchase.description}}</td>
                 <td>{{purchase.price}}</td>
                 <td>
-                    <button class="btn btn-default">Delete</button>
+                    <button class="btn btn-default" ng-click="deletePurchase()" id="{{purchase._id}}">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -41,7 +41,7 @@
                 <label for="price">Price</label>
                 <input type="text" id="price" placeholder="0.00" ng-model="newPurchases.price" />
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10" ng-model="newPurchase.description"></textarea>
+                <textarea name="description" id="description" cols="30" rows="10" ng-model="newPurchases.description"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" ng-click="savePurchase()">Add</button>
