@@ -24,7 +24,7 @@ var DaySchema = new Schema({
 		price: {
 			type: Number,
 			required: true
-		},
+		}
 	}]
 });
 

@@ -1,4 +1,4 @@
-(function () {
+(function() {
     var purchasesApp = angular.module('purchasesApp', ['ui.router', 'restangular']);
     //var tableController = require('./tableController.js');
     //var purchasesCtrl = require('./purchasesCtrl.js');
@@ -6,53 +6,91 @@
     //purchasesApp.config(function (RestangularProvider) {
     //    RestangularProvider.setBaseUrl('data');
     //});
+    // var mondayCtrl = require('./controllers/mondayCtrl.js');
 
 
-    purchasesApp.config(function ($stateProvider, $urlRouterProvider, RestangularProvider) {
-        RestangularProvider.setBaseUrl('data');
+    purchasesApp.config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
+        RestangularProvider.setBaseUrl('http://localhost:9001');
 
         $urlRouterProvider.otherwise("/monday");
 
         $stateProvider
-            .state('monday', {
-                url: "/monday",
+            .state('Monday', {
+                url: "/Monday",
                 templateUrl: "table.html",
-                resolve: {
-                    title: function () {
-                        return {value: 'simple!'}
-                    }
+                controller: function($scope, Restangular) {
+                    Restangular.all('days').getList().then(function(data) {
+                        $scope.days = data;
+                        $scope.purchases = $scope.days[0].purchases;         
+                    });
                 }
             })
-            .state('tuesday', {
-                url: "/tuesday",
-                templateUrl: "table.html"
+            .state('Tuesday', {
+                url: "/Tuesday",
+                templateUrl: "table.html",
+                controller: function($scope, Restangular) {
+                    Restangular.all('days').getList().then(function(data) {
+                        $scope.days = data;
+                        $scope.purchases = $scope.days[1].purchases;         
+                    });
+                }           
             })
-            .state('wednesday', {
-                url: "/wednesday",
-                templateUrl: "table.html"
+            .state('Wednesday', {
+                url: "/Wednesday",
+                templateUrl: "table.html",
+                controller: function($scope, Restangular) {
+                    Restangular.all('days').getList().then(function(data) {
+                        $scope.days = data;
+                        $scope.purchases = $scope.days[2].purchases;         
+                    });
+                }
             })
-            .state('thursday', {
-                url: "/thursday",
-                templateUrl: "table.html"
+            .state('Thursday', {
+                url: "/Thursday",
+                templateUrl: "table.html",
+                controller: function($scope, Restangular) {
+                    Restangular.all('days').getList().then(function(data) {
+                        $scope.days = data;
+                        $scope.purchases = $scope.days[3].purchases;         
+                    });
+                }
             })
-            .state('friday', {
-                url: "/friday",
-                templateUrl: "table.html"
+            .state('Friday', {
+                url: "/Friday",
+                templateUrl: "table.html",
+                controller: function($scope, Restangular) {
+                    Restangular.all('days').getList().then(function(data) {
+                        $scope.days = data;
+                        $scope.purchases = $scope.days[4].purchases;         
+                    });
+                }
             })
-            .state('saturday', {
-                url: "/saturday",
-                templateUrl: "table.html"
+            .state('Saturday', {
+                url: "/Saturday",
+                templateUrl: "table.html",
+                controller: function($scope, Restangular) {
+                    Restangular.all('days').getList().then(function(data) {
+                        $scope.days = data;
+                        $scope.purchases = $scope.days[5].purchases;         
+                    });
+                }
             })
-            .state('sunday', {
-                url: "/sunday",
-                templateUrl: "table.html"
-            })
+            .state('Sunday', {
+                url: "/Sunday",
+                templateUrl: "table.html",controller: function($scope, Restangular) {
+                    Restangular.all('days').getList().then(function(data) {
+                        $scope.days = data;
+                        $scope.purchases = $scope.days[6].purchases;         
+                    });
+                }
+            });
 
     });
 
-    purchasesApp.controller('purchasesCtrl', function ($scope, Restangular) {
-        Restangular.all('days.json').getList().then(function (data) {
+    purchasesApp.controller('purchasesCtrl', function($scope, Restangular) {
+        Restangular.all('days').getList().then(function(data) {
             $scope.days = data;
         });
     });
+
 }());
