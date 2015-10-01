@@ -1,16 +1,20 @@
-
 // Dependencies
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var _ = require('lodash');
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('./database/days.sqlite3');
+
 
 // Create the application.
 var app = express();
 
 // Middleware
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
 
@@ -20,10 +24,6 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
-});
-
-app.use('/hello', function(req, res, next){
-    res.send('Hello World!');
 });
 
 // MongoDB
@@ -45,3 +45,28 @@ mongoose.connection.once('open', function() {
     console.log("Database running");
 });
 
+
+app.get('/data', function(req, res) {
+    db.all("SELECT * FROM days", function(err, rows) {
+        res.json(rows);
+    });
+});
+
+app.get('/purchase', function(req, res) {
+    db.all("SELECT * FROM Purchases", function(err, rows) {
+        res.json(rows);
+    });
+});
+
+
+app.post('/data', function(req, res) {
+    db.run("UPDATE counts SET value = value + 1 WHERE key = ?", "counter", function(err, row) {
+        if (err) {
+            console.err(err);
+            res.status(500);
+        } else {
+            res.status(202);
+        }
+        res.end();
+    });
+});
