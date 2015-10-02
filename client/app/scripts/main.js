@@ -26,28 +26,36 @@
                         $scope.purchase = data;
                         $scope.purchases = [];
                         $scope.newPurchases = {};
-                        Restangular.one('days');
                         var path = $location.url();
                         path = path.substr(1);
-                        
+
                         for (var i = 0; i < $scope.week.length; i++) {
                             if (path == $scope.week[i]) {
-                                $scope.daysId = $scope.days[i].id;
+                                $scope.daysName = $scope.days[i].day;
                                 for (var x = 0; x < $scope.purchase.length; x++) {
-                                    if ($scope.daysId == $scope.purchase[x].days_id) {
-                                        $scope.purchases.push($scope.purchase[x]);                                      
+                                    if ($scope.daysName == $scope.purchase[x].day) {
+                                        $scope.purchases.push($scope.purchase[x]);
                                     }
                                 }
                             }
                         }
                         $scope.savePurchase = function() {
-                            $scope.days[0].purchases.push($scope.newPurchases);
-                            Restangular.copy($scope.days[0]).save();
+                            $scope.newPurchases.day = $scope.daysName;
+                            Restangular.all('purchase').post($scope.newPurchases);
                             $window.location.reload();
                         };
-                        $scope.deletePurchase = function() {
-                            $scope.days[0].purchases.splice(($scope.id), 1);
-                            Restangular.copy($scope.days[0]).remove();
+                        $scope.deletePurchase = function(index) {
+                            $scope.purchaseToDelete = index;
+                            $scope.a = "";
+                            for (var i = 0; i < $scope.purchase.length; i++) {
+                                if ($scope.purchaseToDelete == $scope.purchase[i].id) {
+                                    $scope.a = $scope.purchase[i].id;
+                                }
+                            }
+                            Restangular.one('purchase', $scope.a).remove();
+
+                            // $scope.days[0].purchases.splice(($scope.id), 1);
+                            // Restangular.copy($scope.days[0]).remove();
                         };
                     });
                 }
@@ -55,10 +63,33 @@
             .state('Tuesday', {
                 url: "/Tuesday",
                 templateUrl: "views/table.html",
-                controller: function($scope, Restangular) {
-                    Restangular.all('days').getList().then(function(data) {
-                        $scope.days = data;
-                        $scope.purchases = $scope.days[1].purchases;
+                controller: function($scope, $state, $window, Restangular, $location) {
+                    Restangular.all('purchase').getList().then(function(data) {
+                        $scope.purchase = data;
+                        $scope.purchases = [];
+                        $scope.newPurchases = {};
+                        var path = $location.url();
+                        path = path.substr(1);
+
+                        for (var i = 0; i < $scope.week.length; i++) {
+                            if (path == $scope.week[i]) {
+                                $scope.daysName = $scope.days[i].day;
+                                for (var x = 0; x < $scope.purchase.length; x++) {
+                                    if ($scope.daysName == $scope.purchase[x].day) {
+                                        $scope.purchases.push($scope.purchase[x]);
+                                    }
+                                }
+                            }
+                        }
+                        $scope.savePurchase = function() {
+                            // $scope.purchases.push($scope.newPurchases);
+                            Restangular.save($scope.newPurchases);
+                            $window.location.reload();
+                        };
+                        $scope.deletePurchase = function() {
+                            $scope.days[0].purchases.splice(($scope.id), 1);
+                            Restangular.copy($scope.days[0]).remove();
+                        };
                     });
                 }
             })

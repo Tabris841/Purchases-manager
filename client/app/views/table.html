@@ -1,5 +1,5 @@
 <nav>
-    <h4>Tuesday Purchases</h4>
+    <h4>{{daysName}} Purchases</h4>
     <a href="" class="btn btn-primary" id="addPurchase" data-toggle="modal" data-target="#myModal">Add Purchase</a>
 </nav>
 <div>
@@ -13,13 +13,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="purchase in purchases">
-                <td>{{purchase.name}}</td>
-                <td>{{purchase.store}}</td>
-                <td>{{purchase.description}}</td>
-                <td>{{purchase.price}}</td>
+            <tr ng-repeat="purchase in purchases" >
+                <td data-toggle="modal" data-target="#myModal">{{purchase.name}}</td>
+                <td data-toggle="modal" data-target="#myModal">{{purchase.store}}</td>
+                <td data-toggle="modal" data-target="#myModal">{{purchase.description}}</td>
+                <td data-toggle="modal" data-target="#myModal">{{purchase.price}}</td>
                 <td>
-                    <button class="btn btn-default" ng-click="deletePurchase()" id="{{purchase._id}}">Delete</button>
+                    <button type="button" class="close" ng-click="deletePurchase(purchase.id)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </td>
             </tr>
         </tbody>

@@ -11,3 +11,8 @@ aside ul li {
 
 footer {
   text-align: center; }
+
+.selected {
+  background-color: black;
+  color: white;
+  font-weight: bold; }

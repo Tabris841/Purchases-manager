@@ -16,7 +16,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(methodOverride());
+// app.use(methodOverride('X-HTTP-Method-Override'));
 
 // CORS Support
 app.use(function(req, res, next) {
@@ -26,28 +27,28 @@ app.use(function(req, res, next) {
     next();
 });
 
-// MongoDB
-mongoose.connect('mongodb://admin:1234@ds051923.mongolab.com:51923/purchases');
-mongoose.connection.once('open', function() {
+// // MongoDB
+// mongoose.connect('mongodb://admin:1234@ds051923.mongolab.com:51923/purchases');
+// mongoose.connection.once('open', function() {
 
-    // Load models.
-    app.models = require('./models/index');
+//     // Load models.
+//     app.models = require('./models/index');
 
-    // Load the routes.
-    var routes = require('./routes');
-    _.each(routes, function(controller, route) {
-        app.use(route, controller(app, route));
-    });
+//     // Load the routes.
+//     var routes = require('./routes');
+//     _.each(routes, function(controller, route) {
+//         app.use(route, controller(app, route));
+//     });
 
-    // Start server
-    app.listen(9001);
-    console.log('API listening on port 9001');
-    console.log("Database running");
-});
+//     // Start server
+//     app.listen(9001);
+//     console.log('API listening on port 9001');
+//     console.log("Database running");
+// });
 
 
 app.get('/data', function(req, res) {
-    db.all("SELECT * FROM days", function(err, rows) {
+    db.all("SELECT * FROM Days", function(err, rows) {
         res.json(rows);
     });
 });
@@ -66,21 +67,53 @@ app.get('/purchase/:day', function(req, res) {
 
 
 app.post('/purchase', function(req, res) {
-    name = req.body.name;
-    console.log(name);
-    store = req.body.store;
-    description = req.body.description;
-    price = req.body.price;
-    day = req.body.day;
-    db.run("INSERT INTO Purchases (name, store, description, price, day) VALUES ('" +
-        name + "', '" + store + "', '" + description + "', '" + price + "', '" + day +
-        "')", function(err, row) {
-            if (err) {
-                console.err(err);
-                res.status(500);
-            } else {
-                res.status(202);
-            }
-            res.end();
-        });
+    var name = req.body.name;
+    var store = req.body.store;
+    var description = req.body.description;
+    var price = req.body.price;
+    var day = req.body.day;
+    db.run("INSERT INTO Purchases VALUES (NULL, '" + name + "', '" + store + "', '" + description + "', '" + price + "', '" + day + "')", function(err, row) {
+        if (err) {
+            console.err(err);
+            res.status(500);
+        } else {
+            res.status(202);
+        }
+        res.end();
+    });
 });
+
+app.put('/purchase', function(req, res) {
+    var name = req.body.name;
+    var store = req.body.store;
+    var description = req.body.description;
+    var price = req.body.price;
+    var id = req.body.id;
+    db.run("UPDATE Purchases SET name='" + name + "', store='" + store + "', description='" + description + "', price='" + price + "' WHERE id = " + id, function(err, row) {
+        if (err) {
+            console.err(err);
+            res.status(500);
+        } else {
+            res.status(202);
+        }
+        res.end();
+    });
+});
+
+app.delete('/purchase/:id', function(req, res) {
+    console.log(req.params);
+    var id = req.params.id;
+    db.run("DELETE FROM Purchases WHERE id = " + id, function(err) {
+        if (err) {
+            console.err(err);
+            res.status(500);
+        } else {
+            res.status(202);
+        }
+        res.end();
+    });
+});
+
+app.listen(9001);
+console.log('API listening on port 9001');
+console.log("Database running");
