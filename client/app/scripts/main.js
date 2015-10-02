@@ -17,6 +17,8 @@
 
         $urlRouterProvider.otherwise("/monday");
 
+        
+
 
         $stateProvider
             .state('Monday', {
@@ -34,15 +36,13 @@
                         $scope.savePurchase = function () {
                             $scope.days[0].purchases.push($scope.newPurchases);
                             Restangular.copy($scope.days[0]).save();
-                            $window.location.reload()
-
-
+                            $window.location.reload();
                         };
                         $scope.deletePurchase = function () {
                             $scope.days[0].purchases.splice(($scope.id), 1);
                             console.log($scope.days[0].purchases);
                             Restangular.copy($scope.days[0]).remove();
-                        }
+                        };
                     });
                 }
             })
