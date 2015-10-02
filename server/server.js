@@ -72,13 +72,15 @@ app.post('/purchase', function(req, res) {
     description = req.body.description;
     price = req.body.price;
     day = req.body.day;
-    db.run("INSERT INTO Purchases (name, store, description, price, day) VALUES('" + name + "', '" + store + "', '" + description + "', '" + price + "', '" + day + "')", function(err, row) {
-        if (err) { 
-            console.err(err);
-            res.status(500);
-        } else {
-            res.status(202);
-        }
-        res.end();
-    });
+    db.run("INSERT INTO Purchases (name, store, description, price, day) VALUES ('" +
+        name + "', '" + store + "', '" + description + "', '" + price + "', '" + day +
+        "')", function(err, row) {
+            if (err) {
+                console.err(err);
+                res.status(500);
+            } else {
+                res.status(202);
+            }
+            res.end();
+        });
 });
