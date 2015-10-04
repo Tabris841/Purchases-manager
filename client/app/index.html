@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Purchases</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
-    <link rel="stylesheet" href="styles/main.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
+    <script src='bower_components/angular-bootstrap/ui-bootstrap-tpls.js'></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bundle.js"></script>
 </head>
+
 <body ng-app="app">
-<div class="container" ng-controller="dayController">
-    <nav class="navbar">
-        <h3>Purchases</h3>
-    </nav>
-    <div id="mainDiv" class="container">
-        <aside class="col-md-2 sidebar">
-            <h4>Purchases by Day</h4>
-            <ul class="list-group">
-                <li ng-repeat="day in days"><a ui-sref="purchases({day: day.day})" class="list-group-item">{{day.day}}</a></li>
-            </ul>
-        </aside>
-        <section class="col-md-10 main" ui-view>                      
-        </section>        
-    </div>
-</div>
-<footer>
-    <p>Copyright2013 Henry Schein Solutions | All Rights Reserved</p>
-</footer>
+    <div id="wrapper" class="container" ng-controller="dayController">
+        <header>
+            <h1>Purchases</h1>
+        </header>
+        <div id="main">
+            <aside class="col-sm-3 sidebar">
+                <div class="row aside-header">
+                    <div class="col-sm-12">
+                        <h4>Purchase by day</h2>
+					</div>
+				</div>				
+				<div class="list-group">					
+					<a ui-sref="Purchases({day: day.day}) "class="list-group-item" ng-repeat="day in days">{{day.day}}</a>						
+				</div>			
+			</aside>
+			<section class="col-sm-9" ui-view>
+			</section>
+		</div>
+	</div>
+	<footer>
+		<p>Copyright&copy;2013 Henry Schein Solutions | All Rights Reserved</p>
+	</footer>
 </body>
+
 </html>

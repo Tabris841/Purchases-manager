@@ -48,7 +48,7 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['app/*.html'], ['html']);
+    gulp.watch(['app/*.html','app/**/*.html'], ['html']);
     gulp.watch('app/styles/*.scss', ['sass']);
     gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['lint','browserify'])
 });

@@ -9,16 +9,10 @@
         $urlRouterProvider.otherwise("/Monday");
 
         $stateProvider
-            .state('purchases', {
+            .state('Purchases', {
                 url: "/{day}",
                 templateUrl: "views/table.html",
                 controller: 'purchasesController'
             });
-    });
-
-    app.factory('FirstRestangular', function(Restangular) {
-        return Restangular.withConfig(function(RestangularConfigurer) {
-            RestangularConfigurer.setBaseUrl('http://localhost:9001');
-        });
     });
 }());

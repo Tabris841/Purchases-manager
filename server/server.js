@@ -1,11 +1,11 @@
+/*jslint node: true */
+
 // Dependencies
 var express = require('express');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var _ = require('lodash');
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/days.sqlite3');
-
 
 // Create the application.
 var app = express();
@@ -38,11 +38,17 @@ app.get('/purchase', function(req, res) {
     });
 });
 
-app.get('/purchase/:day', function(req, res) {
-    db.all("SELECT * FROM Purchases WHERE day='" + req.params.day + "'", function(err, rows) {
-        res.json(rows);
-    });
-});
+// app.get('/purchase/:id', function(req, res) {
+//     db.all("SELECT * FROM Purchases WHERE id=" + req.params.id, function(err, rows) {
+//         res.json(rows);
+//     });
+// });
+
+// app.get('/purchase/:day', function(req, res) {
+//     db.all("SELECT * FROM Purchases WHERE day='" + req.params.day + "'", function(err, rows) {
+//         res.json(rows);
+//     });
+// });
 
 
 app.post('/purchase', function(req, res) {
@@ -62,7 +68,7 @@ app.post('/purchase', function(req, res) {
     });
 });
 
-app.put('/purchase', function(req, res) {
+app.put('/purchase/:day', function(req, res) {
     var name = req.body.name;
     var store = req.body.store;
     var description = req.body.description;
