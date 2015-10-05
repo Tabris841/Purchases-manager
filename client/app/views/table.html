@@ -1,11 +1,8 @@
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-12" id="table-header">
         <h4>{{daysName}} Purchases</h4>
-        
+        <button ui-sref="Purchases.add()" class="btn btn-primary pull-right">Add Purchase</button>
     </div>
-    <div class="col-sm-6">
-        <button class="btn btn-primary pull-right btn-add-new" id="addPurchase" data-toggle="modal" data-target="#addModal">Add Purchase</button>
-    </div> 
     <div class="table-row">
         <table class="table table-striped">
             <thead>
@@ -19,43 +16,17 @@
             </thead>
             <tbody>
                 <tr ng-repeat="purchase in purchases">
-                    <td data-toggle="modal" data-target="#editModal" ng-click="goToEdit(purchase.id)">{{purchase.name}}</td>
-                    <td data-toggle="modal" data-target="#editModal" ng-click="goToEdit(purchase.id)">{{purchase.store}}</td>
-                    <td data-toggle="modal" data-target="#editModal" ng-click="goToEdit(purchase.id)">{{purchase.description}}</td>
-                    <td data-toggle="modal" data-target="#editModal" ng-click="goToEdit(purchase.id)">{{purchase.price}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.name}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.store}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.description}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.price}}</td>
                     <td>
-                        <button type="button" class="close" ng-click="deletePurchase(purchase.id)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" ng-click="deletePurchase(purchase.id)" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-</div>
-<!-- Add Purchase Modal -->
-<div class="modal fade row modal-outer" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog custom-modal modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add Purchase</h4>
-            </div>
-            <form action="post" name="AddPurchase">
-                <div class="modal-body">
-                    <label for="purchaseName">Purchase Name</label>
-                    <input type="text" id="purchaseName" placeholder="Enter purchase name" ng-model="newPurchase.name" required/>
-                    <label for="storeName">Store Name</label>
-                    <input type="text" id="storeName" placeholder="Enter store name" ng-model="newPurchase.store" required/>
-                    <label for="price">Price</label>
-                    <input type="text" id="price" placeholder="0.00" ng-model="newPurchase.price" required/>
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="10" ng-model="newPurchase.description" required></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="savePurchase()">Add</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 <!-- Edit Purchase Modal -->

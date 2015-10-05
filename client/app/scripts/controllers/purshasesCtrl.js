@@ -18,7 +18,7 @@
 			$scope.savePurchase = function() {
 				$scope.newPurchase.day = $scope.daysName;
 				Restangular.all('purchase').post($scope.newPurchase).then(function() {
-					$state.go($state.current, {}, {reload: true});		
+					$state.go('Purchases', {}, {reload: true});		
 				});				
 			};
 
@@ -47,7 +47,7 @@
 
 			$scope.editPurchases = function() {
 				$scope.editPurchase.put().then(function() {
-					$state.go($state.current, {}, {reload: true});	
+					$state.go('Purchases', {}, {reload: true});	
 				});
 			};
 		});

@@ -23,7 +23,6 @@
 
 body {
   background-color: #EAEAEB;
-  font-family: sans-serif;
 }
 
 #wrapper {
@@ -61,41 +60,23 @@ aside {
   background-color: #E9EEF2;
   height: 557px;
   border-radius: 0 0 0 5px;
-  .aside-header {
-    // height: 40px;
+  .blue {
+    color: #337ab7;
+    font-weight: bold;
+    background-color: #F2F2F2;
   }
-  h2 {
-    font-size: 1.6em;
-    margin: 5px 6px;
-  }
-
-  a:active {
-    background-color: #0275D8;
-    color: white;
- }
-  
 }
 
 #main {
   border-top: 1px solid white;
   height: 565px;
-  .partial-header {
+  #table-header {
     background-color: #F6F6F6;
-    h2 {
-      font-size: 1.6em;
-      margin: 5px 6px;
-      // line-height: 30px;
-    }
-    .btn-add-new {
-      height: 25px;
-      width: 120px;
-      line-height: 25px;
-      padding: 0;
-      margin-top: 5px;
-      border-radius: 0;
-      @include linearGradient(#719EB9, #41708C);
-      border: 1px solid #41708C;
-      fonst-size: 0.9em;
+    border-bottom: 2px solid #E8ECEF;
+    padding: 5px 12px 3px;
+    margin-bottom: 10px;
+    h4 {
+      display: inline-block;
     }
   }
   .table-row {
@@ -115,6 +96,7 @@ aside {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  border: 10px solid rgba(0, 0, 0, 0.5);
 }
 
 .modal-outer {
@@ -123,25 +105,48 @@ aside {
 }
 
 .custom-modal {
-  border: 10px solid black;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  padding: 0;
   overflow: hidden;
   .modal-header {
     background-color: #C9D2D5;
-    padding: 5px;
-    vertical-align: middle;
-
-    h3{
+    padding: 8px;
+    bold-weight: bolder;
+  }
+  .row {
+    label {
+      font-size: 1.2em;
+      color: #7F7F7F;
+      font-weight: normal;
+    }
+    input {
       display: inline-block;
+      border-radius: 0;
     }
+    .glyphicon {
+      color: #B7B7B7;
+      background-color: #F6F6F6;
+      position: absolute;
+      padding: 9px;
+      padding-right: 9px;
+      padding-left: 7px;
 
-    .close-btn{
-      padding: 5px;
-      cursor: pointer;
+      left: 16px;
+      border-right: 1px solid #CCC;
     }
-
+    #price {
+      text-align: right;
+      padding-right: 8px;
+    }
+    textarea {
+      border-radius: 0;
+    }
+  }
+  .modal-footer {
+    background-color: #F6F6F6;
+    padding: 10px;
+    button {
+      margin-right: 8px;
+    }
   }
 }
 

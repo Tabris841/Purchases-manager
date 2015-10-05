@@ -1,0 +1,48 @@
+<!-- Add Purchase Modal -->
+<div class="row modal-outer" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog custom-modal modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Purchase</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="purchaseName">Purchase Name</label>                    
+                    </div>
+                    <div class="col-md-4">
+                        <label for="storeName">Store Name</label>                      
+                    </div>
+                    <div class="col-md-3">
+                        <label for="price">Price</label>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">                      
+                        <input type="text" id="purchaseName" placeholder="Enter purchase name" ng-model="newPurchase.name" class="form-control" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" id="storeName" placeholder="Enter store name" ng-model="newPurchase.store" class="form-control" required/>
+                    </div>
+                    <div class="col-md-3 form-group has-feedback">
+                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                        <input type="text" id="price" placeholder="0.00" ng-model="newPurchase.price" class="form-control" required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="description">Description</label>                       
+                    </div>
+                    <div class="col-md-12">
+                        <textarea name="description" id="description" cols="116" rows="5" ng-model="newPurchase.description" class="form-control" placeholder="Enter purchase description" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" data-dismiss="modal" ng-click="savePurchase()">Add</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

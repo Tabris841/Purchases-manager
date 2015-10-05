@@ -4,8 +4,7 @@
   box-sizing: border-box; }
 
 body {
-  background-color: #EAEAEB;
-  font-family: sans-serif; }
+  background-color: #EAEAEB; }
 
 #wrapper {
   border-top: 1px solid #fff;
@@ -52,44 +51,21 @@ aside {
   background-color: #E9EEF2;
   height: 557px;
   border-radius: 0 0 0 5px; }
-  aside h2 {
-    font-size: 1.6em;
-    margin: 5px 6px; }
-  aside a:active {
-    background-color: #0275D8;
-    color: white; }
+  aside .blue {
+    color: #337ab7;
+    font-weight: bold;
+    background-color: #F2F2F2; }
 
 #main {
   border-top: 1px solid white;
   height: 565px; }
-  #main .partial-header {
-    background-color: #F6F6F6; }
-    #main .partial-header h2 {
-      font-size: 1.6em;
-      margin: 5px 6px; }
-    #main .partial-header .btn-add-new {
-      height: 25px;
-      width: 120px;
-      line-height: 25px;
-      padding: 0;
-      margin-top: 5px;
-      border-radius: 0;
-      background: #719EB9;
-      /* Old browsers */
-      background: -moz-linear-gradient(top, #719EB9 0%, #41708C 100%);
-      /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #719EB9), color-stop(100%, #41708C));
-      /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(top, #719EB9 0%, #41708C 100%);
-      /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top, #719EB9 0%, #41708C 100%);
-      /* Opera 11.10+ */
-      background: -ms-linear-gradient(top, #719EB9 0%, #41708C 100%);
-      /* IE10+ */
-      background: linear-gradient(to bottom, #719EB9 0%, #41708C 100%);
-      /* W3C */
-      border: 1px solid #41708C;
-      fonst-size: 0.9em; }
+  #main #table-header {
+    background-color: #F6F6F6;
+    border-bottom: 2px solid #E8ECEF;
+    padding: 5px 12px 3px;
+    margin-bottom: 10px; }
+    #main #table-header h4 {
+      display: inline-block; }
   #main .table-row {
     padding: 10px;
     height: 500px; }
@@ -114,27 +90,46 @@ aside {
 .modal-content {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 5px; }
+  border-radius: 5px;
+  border: 10px solid rgba(0, 0, 0, 0.5); }
 
 .modal-outer {
   margin: 0;
   padding: 0; }
 
 .custom-modal {
-  border: 10px solid black;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  padding: 0;
   overflow: hidden; }
   .custom-modal .modal-header {
     background-color: #C9D2D5;
-    padding: 5px;
-    vertical-align: middle; }
-    .custom-modal .modal-header h3 {
-      display: inline-block; }
-    .custom-modal .modal-header .close-btn {
-      padding: 5px;
-      cursor: pointer; }
+    padding: 8px;
+    bold-weight: bolder; }
+  .custom-modal .row label {
+    font-size: 1.2em;
+    color: #7F7F7F;
+    font-weight: normal; }
+  .custom-modal .row input {
+    display: inline-block;
+    border-radius: 0; }
+  .custom-modal .row .glyphicon {
+    color: #B7B7B7;
+    background-color: #F6F6F6;
+    position: absolute;
+    padding: 9px;
+    padding-right: 9px;
+    padding-left: 7px;
+    left: 16px;
+    border-right: 1px solid #CCC; }
+  .custom-modal .row #price {
+    text-align: right;
+    padding-right: 8px; }
+  .custom-modal .row textarea {
+    border-radius: 0; }
+  .custom-modal .modal-footer {
+    background-color: #F6F6F6;
+    padding: 10px; }
+    .custom-modal .modal-footer button {
+      margin-right: 8px; }
 
 footer {
   text-align: center; }

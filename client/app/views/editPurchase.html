@@ -1,0 +1,46 @@
+<!-- Add Purchase Modal -->
+<div class="row modal-outer">
+    <div class="custom-modal">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit Purchase</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <label for="purchaseName">Purchase Name</label>
+                </div>
+                <div class="col-md-4">
+                    <label for="storeName">Store Name</label>
+                </div>
+                <div class="col-md-3">
+                    <label for="price">Price</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <input type="text" id="purchaseName" placeholder="Enter purchase name" ng-model="editPurchase.name" class="form-control" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" id="storeName" placeholder="Enter store name" ng-model="editPurchase.store" class="form-control" required/>
+                </div>
+                <div class="col-md-3 form-group has-feedback">
+                    <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                    <input type="text" id="price" placeholder="0.00" ng-model="editPurchase.price" class="form-control" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="description">Description</label>
+                </div>
+                <div class="col-md-12">
+                    <textarea name="description" id="description" cols="116" rows="5" ng-model="editPurchase.description" class="form-control" placeholder="Enter purchase description" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary pull-left" ng-click="$close() && editPurchases()">Add</button>
+            <button type="button" class="btn btn-default pull-left" ng-click="$dismiss()">Cancel</button>
+        </div>
+    </div>
+</div>

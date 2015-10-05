@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/main.css" />
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src='bower_components/angular-bootstrap/ui-bootstrap-tpls.js'></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
@@ -26,11 +27,17 @@
             <aside class="col-sm-3 sidebar">
                 <div class="row aside-header">
                     <div class="col-sm-12">
-                        <h4>Purchase by day</h2>
+                        <h4>Purchase by Day</h3>
 					</div>
 				</div>				
 				<div class="list-group">					
-					<a ui-sref="Purchases({day: day.day}) "class="list-group-item" ng-repeat="day in days">{{day.day}}</a>						
+					<a ui-sref="Purchases({day: day.day})"
+                     class="list-group-item blue" 
+                     ng-repeat="day in days" 
+                     ng-class="{'active': $index == selectedIndex}" 
+                     ng-click="itemClicked($index)">
+                     {{day.day}}
+                    </a>						
 				</div>			
 			</aside>
 			<section class="col-sm-9" ui-view>
