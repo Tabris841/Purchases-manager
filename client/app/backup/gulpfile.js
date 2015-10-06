@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
     browserify = require('gulp-browserify'),
-    karma = require('gulp-karma');
+    Server = require('karma').Server;
 
 gulp.task('connect', function() {
     connect.server({
@@ -47,20 +47,14 @@ gulp.task('browserify', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('test', function() {
-  // Be sure to return the stream
-  // NOTE: Using the fake './foobar' so as to run the files
-  // listed in karma.conf.js INSTEAD of what was passed to
-  // gulp.src !
-  return gulp.src('./test')
-    .pipe(karma({
-      configFile: './test/karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      console.log(err);
-      this.emit('end'); //instead of erroring the stream, end it
+
+
+gulp.task('test', function(done) {
+    new Server.start({
+        configFile: __dirname + '\\test\\karma.conf.js',
+        singleRun: true
+    }, function() {
+        done();
     });
 });
 
@@ -69,7 +63,6 @@ gulp.task('watch', function() {
     gulp.watch(['app/*.html', 'app/**/*.html'], ['html']);
     gulp.watch('app/styles/*.scss', ['sass']);
     gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['lint', 'browserify']);
-    gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['test']);
 });
 
 gulp.task('default', ['connect', 'watch', 'sass', 'browserify', 'lint', 'test']);

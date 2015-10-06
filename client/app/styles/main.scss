@@ -90,19 +90,22 @@ aside {
         @include linearGradient(#ECF2F5, #DCE8EF);
         th{
           color: #656565;
+          border-bottom: none;
         }
-        td {
-           text-overflow: hidden;
-           overflow: hidden;
-        }
-      }
+      }     
+      .description {
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 330px;
+        padding-bottom: 10px;
+      }     
       .price {
           text-align: right;          
           padding-right: 30px;
         }
     }
   }
-
 }
 
 .modal-content {

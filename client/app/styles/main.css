@@ -89,10 +89,14 @@ aside {
         background: linear-gradient(to bottom, #ECF2F5 0%, #DCE8EF 100%);
         /* W3C */ }
         #main .table-row table thead th {
-          color: #656565; }
-        #main .table-row table thead td {
-          text-overflow: hidden;
-          overflow: hidden; }
+          color: #656565;
+          border-bottom: none; }
+      #main .table-row table .description {
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 330px;
+        padding-bottom: 10px; }
       #main .table-row table .price {
         text-align: right;
         padding-right: 30px; }

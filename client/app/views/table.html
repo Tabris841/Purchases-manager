@@ -18,7 +18,7 @@
                 <tr ng-repeat="purchase in purchases">
                     <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-3">{{purchase.name}}</td>
                     <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-3">{{purchase.store}}</td>
-                    <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-5">{{purchase.description}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-5 description">{{purchase.description}}</td>
                     <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-1 price">{{purchase.price}}</td>
                     <td ng-click="deletePurchase(purchase.id)">
                         <button type="button" class="close"  aria-label="Close"><span aria-hidden="true">&times;</span>
