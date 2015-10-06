@@ -90,6 +90,9 @@ aside {
         /* W3C */ }
         #main .table-row table thead th {
           color: #656565; }
+        #main .table-row table thead td {
+          text-overflow: hidden;
+          overflow: hidden; }
       #main .table-row table .price {
         text-align: right;
         padding-right: 30px; }
@@ -120,6 +123,10 @@ aside {
   .custom-modal .row input {
     display: inline-block;
     border-radius: 0; }
+  .custom-modal .row .ng-invalid.ng-touched {
+    border: 2px solid #bb1f34; }
+  .custom-modal .row .red {
+    color: #bb1f34; }
   .custom-modal .row .glyphicon {
     color: #B7B7B7;
     background-color: #F6F6F6;

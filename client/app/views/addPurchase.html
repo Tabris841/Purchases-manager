@@ -1,46 +1,60 @@
 <!-- Add Purchase Modal -->
 <div class="row modal-outer">
     <div class="custom-modal">
-        <div class="modal-header">   
-            <span class="pull-right close" ng-click="$dismiss()">&times;</span>         
+        <div class="modal-header">
+            <span class="pull-right close" ng-click="$dismiss()">&times;</span>
             <h4 class="modal-title" id="myModalLabel">Add Purchase</h4>
         </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-5">
-                    <label for="purchaseName">Purchase Name</label>
+        <form novalidate name="addForm">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="purchaseName">Purchase Name</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="storeName">Store Name</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="price">Price</label>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="storeName">Store Name</label>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter purchase name" name="name" ng-model="newPurchase.name" class="form-control" required/>
+                            <p ng-show="(addForm.$submitted || addForm.name.$touched) && addForm.name.$error.required" class="help-block red">Purchase name is required.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter store name" name="store" ng-model="newPurchase.store" class="form-control" required
+                            min="5"/>
+                            <p ng-show="(addForm.$submitted || addForm.store.$touched) && addForm.store.$error.required" class="help-block red">Store name is required.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group has-feedback">
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                            <input type="number" id="price" name="price" ng-model="newPurchase.price" class="form-control" placeholder="0.00"
+                            min="5" required/>
+                            <p ng-show="(addForm.$submitted || addForm.price.$touched ) &&  addForm.price.$error.required || addForm.price.$error.min" class="help-block red"> Price value should be higher than $5</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <label for="price">Price</label>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="description">Description</label>
+                    </div>
+                    <div class="col-md-12">
+                        <textarea name="description" cols="116" rows="5" name="description" ng-model="newPurchase.description" class="form-control" placeholder="Enter purchase description" required ></textarea>
+                        <p ng-show="(addForm.$submitted || addForm.description.$touched) && addForm.description.$error.required" class="help-block red">Description is required.</p>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-5">
-                    <input type="text" id="purchaseName" placeholder="Enter purchase name" ng-model="newPurchase.name" class="form-control" required/>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" id="storeName" placeholder="Enter store name" ng-model="newPurchase.store" class="form-control" required/>
-                </div>
-                <div class="col-md-3 form-group has-feedback">
-                    <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                    <input type="text" id="price" placeholder="0.00" ng-model="newPurchase.price" class="form-control" required/>
-                </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary pull-left" ng-click="addForm.$valid && $close() && savePurchase()">Add</button>
+                <button type="button" class="btn btn-default pull-left" ng-click="$dismiss()">Cancel</button>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="description">Description</label>
-                </div>
-                <div class="col-md-12">
-                    <textarea name="description" id="description" cols="116" rows="5" ng-model="newPurchase.description" class="form-control" placeholder="Enter purchase description" required></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary pull-left" ng-click="$close() && savePurchase()">Add</button>
-            <button type="button" class="btn btn-default pull-left" ng-click="$dismiss()">Cancel</button>
-        </div>
+        </form>
     </div>
 </div>

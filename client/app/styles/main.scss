@@ -91,6 +91,10 @@ aside {
         th{
           color: #656565;
         }
+        td {
+           text-overflow: hidden;
+           overflow: hidden;
+        }
       }
       .price {
           text-align: right;          
@@ -134,6 +138,12 @@ aside {
       display: inline-block;
       border-radius: 0;
     }
+    .ng-invalid.ng-touched {
+      border: 2px solid #bb1f34;
+    }
+    .red {
+      color: #bb1f34;
+    }
     .glyphicon {
       color: #B7B7B7;
       background-color: #F6F6F6;
@@ -141,7 +151,6 @@ aside {
       padding: 9px;
       padding-right: 9px;
       padding-left: 7px;
-
       left: 16px;
       border-right: 1px solid #CCC;
     }
