@@ -23,11 +23,13 @@
 
 body {
   background-color: #EAEAEB;
+  font-family: Arial;
 }
 
 #wrapper {
   border-top: 1px solid #fff;
   margin: 20px auto;
+  margin-bottom: 10px;
   padding: 0;
   background-color: #fff;
   border-radius: 5px;
@@ -62,8 +64,8 @@ aside {
   border-radius: 0 0 0 5px;
   .blue {
     color: #337ab7;
-    font-weight: bold;
     background-color: #F2F2F2;
+    font-weight: 600;
   }
 }
 
@@ -86,7 +88,14 @@ aside {
       border: 2px solid #E4EDF2;
       thead {
         @include linearGradient(#ECF2F5, #DCE8EF);
+        th{
+          color: #656565;
+        }
       }
+      .price {
+          text-align: right;          
+          padding-right: 30px;
+        }
     }
   }
 
@@ -111,6 +120,9 @@ aside {
     background-color: #C9D2D5;
     padding: 8px;
     bold-weight: bolder;
+    h4 {
+      font-weight: bolder;
+    }
   }
   .row {
     label {

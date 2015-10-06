@@ -16,12 +16,12 @@
             </thead>
             <tbody>
                 <tr ng-repeat="purchase in purchases">
-                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.name}}</td>
-                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.store}}</td>
-                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.description}}</td>
-                    <td ui-sref="Purchases.edit({index: purchase.id})" ng-click="goToEdit(purchase.id)">{{purchase.price}}</td>
-                    <td>
-                        <button type="button" class="close" ng-click="deletePurchase(purchase.id)" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-3">{{purchase.name}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-3">{{purchase.store}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-5">{{purchase.description}}</td>
+                    <td ui-sref="Purchases.edit({index: purchase.id})" class="col-md-1 price">{{purchase.price}}</td>
+                    <td ng-click="deletePurchase(purchase.id)">
+                        <button type="button" class="close"  aria-label="Close"><span aria-hidden="true">&times;</span>
                         </button>
                     </td>
                 </tr>
@@ -29,30 +29,4 @@
         </table>
     </div>
 </div>
-<!-- Edit Purchase Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add Purchase</h4>
-            </div>
-            <div class="modal-body">
-                <form action="" name="AddPurchase" novalidate>
-                    <label for="purchaseName">Purchase Name</label>
-                    <input type="text" id="purchaseName" ng-model="editPurchase.name" required/>
-                    <label for="storeName">Store Name</label>
-                    <input type="text" id="storeName" ng-model="editPurchase.store" required/>
-                    <label for="price">Price</label>
-                    <input type="text" id="price" ng-model="editPurchase.price" required/>
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="10" ng-model="editPurchase.description" required></textarea>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editPurchases()">Add</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
+

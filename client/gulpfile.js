@@ -31,7 +31,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('lint', function() {
-    gulp.src('./app/scripts/*.js')
+    gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });

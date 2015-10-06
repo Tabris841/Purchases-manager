@@ -3,6 +3,7 @@
         dayCtrl = require('./controllers/dayCtrl.js'),
         purchasesCtrl = require('./controllers/purshasesCtrl.js');
         editCtrl = require('./controllers/editCtrl.js');
+        addCtrl = require('./controllers/addCtrl.js');
 
     app.config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
         RestangularProvider.setBaseUrl('http://localhost:9001');
@@ -18,7 +19,7 @@
                 onEnter: function ($modal, $state) {
                     $modal.open({
                         templateUrl: "views/addPurchase.html",
-                        controller: 'purchasesController',
+                        controller: 'addController',
                         size: 'lg'
                     }).result.finally(function() {
                         $state.go('Purchases');
