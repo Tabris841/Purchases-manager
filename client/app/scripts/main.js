@@ -3,14 +3,12 @@
         dayCtrl = require('./controllers/dayCtrl.js'),
         purchasesCtrl = require('./controllers/purshasesCtrl.js');
         editCtrl = require('./controllers/editCtrl.js');
-        addCtrl = require('./controllers/addCtrl.js');
-
-    var a = 1;    
+        addCtrl = require('./controllers/addCtrl.js'); 
 
     app.config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
         RestangularProvider.setBaseUrl('http://localhost:9001');
 
-        $stateProvider
+        $stateProvider           
             .state('Purchases', {
                 url: "/{day}",
                 templateUrl: "views/table.html",
@@ -38,7 +36,7 @@
                     }).result.finally(function() {
                         $state.go('Purchases');
                     });
-                }
+                }  
             });
     });
 }());

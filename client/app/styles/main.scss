@@ -92,7 +92,10 @@ aside {
           color: #656565;
           border-bottom: none;
         }
-      }     
+      } 
+      td {
+        box-sizing: border-box;
+      }    
       .description {
         display: inline-block;
         text-overflow: ellipsis;

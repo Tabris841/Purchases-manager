@@ -91,6 +91,8 @@ aside {
         #main .table-row table thead th {
           color: #656565;
           border-bottom: none; }
+      #main .table-row table td {
+        box-sizing: border-box; }
       #main .table-row table .description {
         display: inline-block;
         text-overflow: ellipsis;
