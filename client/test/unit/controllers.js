@@ -51,15 +51,19 @@ describe('Purchases controllers', function() {
 	});
 
 	describe('purchasesController', function() {
-		var scope, ctrl, $httpBackend, stateParams = {day: "Monday"}, state = "Monday",
+		var scope, ctrl, $httpBackend, stateParams = {
+				day: "Monday"
+			},
 			purchaseData = function() {
 				return [{
+					id: 1,
 					name: "Gift card",
 					store: "Tesco",
 					price: 4.50,
 					description: "Some text",
 					day: "Monday"
 				}, {
+					id: 2,
 					name: "Batteries",
 					store: "Walmart",
 					price: 9.99,
@@ -73,8 +77,7 @@ describe('Purchases controllers', function() {
 			$httpBackend.expectGET('http://localhost:9001/purchase').respond(purchaseData());
 			scope = $rootScope.$new();
 			ctrl = $controller('purchasesController', {
-				$scope: scope,
-				$state: state,
+				'$scope': scope,
 				$stateParams: stateParams
 			});
 		}));
@@ -84,9 +87,17 @@ describe('Purchases controllers', function() {
 			expect(sanitizeRestangularAll(scope.purchase)).toEqual(purchaseData());
 		});
 
-		it('should day be equal to current stae', function() {
+		it('should selected day be equal to current state', function() {
 			$httpBackend.flush();
 			expect(scope.daysName).toEqual(stateParams.day);
+		});
+
+		it('should delete purchase from purchases database', function() {										
+			$httpBackend.flush();	
+			scope.deletePurchase(1);
+			$httpBackend.expectDELETE('http://localhost:9001/purchase/' + stateParams.day).respond(purchaseData());			
+			console.log(sanitizeRestangularAll(scope.purchase));
+			expect(sanitizeRestangularAll(scope.purchase)).toEqual(purchaseData());
 		});
 	});
 
