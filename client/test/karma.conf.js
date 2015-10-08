@@ -15,16 +15,16 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'app/bower_components/jquery/dist/jquery.js',
             'app/bower_components/angular/angular.js',           
             'app/bower_components/angular-animate/angular-animate.js',
             'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'app/bower_components/angular-animate/angular-animate.js',
             'app/bower_components/angular-ui-router/release/angular-ui-router.js',
-            'app/bower_components/bootstrap/dist/css/bootstrap.css',
-            'app/bower_components/jquery/dist/jquery.js',
+            'app/bower_components/bootstrap/dist/css/bootstrap.css',         
             'app/bower_components/lodash/lodash.js',
             'app/bower_components/restangular/dist/restangular.js',
-            'node_modules/angular-mocks/angular-mocks.js',
+            'app/bower_components/angular-mocks/angular-mocks.js',
             'app/scripts/*.js',
             'app/scripts/**/*.js',
             'test/unit/*.js'
