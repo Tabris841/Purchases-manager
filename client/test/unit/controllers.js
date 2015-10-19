@@ -51,7 +51,7 @@ describe('Purchases controllers', function() {
 	});
 
 	describe('purchasesController', function() {
-		var scope, ctrl, $httpBackend, stateParams = {
+		var scope, ctrl, $httpBackend, state, stateParams = {
 				day: "Monday"
 			},
 			purchaseData = function() {
@@ -76,9 +76,11 @@ describe('Purchases controllers', function() {
 			$httpBackend = _$httpBackend_;
 			$httpBackend.expectGET('http://localhost:9001/purchase').respond(purchaseData());
 			scope = $rootScope.$new();
+			state = jasmine.createSpyObj('$state', ['go']);
 			ctrl = $controller('purchasesController', {
-				'$scope': scope,
-				$stateParams: stateParams
+				$scope: scope,
+				$stateParams: stateParams,
+				$state: state
 			});
 		}));
 
@@ -92,12 +94,11 @@ describe('Purchases controllers', function() {
 			expect(scope.daysName).toEqual(stateParams.day);
 		});
 
-		it('should delete purchase from purchases database', function() {										
+		it('should deletePpurchase be a function and send delete request to purchases database', function() {										
 			$httpBackend.flush();	
 			scope.deletePurchase(1);
-			$httpBackend.expectDELETE('http://localhost:9001/purchase/' + stateParams.day).respond(purchaseData());			
-			console.log(sanitizeRestangularAll(scope.purchase));
-			expect(sanitizeRestangularAll(scope.purchase)).toEqual(purchaseData());
+			expect(typeof scope.deletePurchase).toEqual('function');
+			$httpBackend.expectDELETE('http://localhost:9001/purchase/1').respond(purchaseData());
 		});
 	});
 

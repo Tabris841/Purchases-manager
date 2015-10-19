@@ -25,7 +25,7 @@
 				Restangular.one('purchase', $scope.purchaseToDelete).remove().then(function() {
 					$state.go($state.current, {}, {reload: true});
 				});
-			};			
+			};
 		});
 	};
 
