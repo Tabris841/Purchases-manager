@@ -44,6 +44,11 @@ describe('Purchases controllers', function() {
 			});
 		}));
 
+		afterEach(function() {
+			$httpBackend.verifyNoOutstandingExpectation();
+			$httpBackend.verifyNoOutstandingRequest();
+		});
+
 		it('should get days from database and assign them to days', function() {
 			$httpBackend.flush();
 			expect(sanitizeRestangularAll(scope.days)).toEqual(daysData());
@@ -82,6 +87,11 @@ describe('Purchases controllers', function() {
 			});
 		}));
 
+		afterEach(function() {
+			$httpBackend.verifyNoOutstandingExpectation();
+			$httpBackend.verifyNoOutstandingRequest();
+		});
+
 		it('should get purchases from database and assign them to purchase', function() {
 			$httpBackend.flush();
 			expect(sanitizeRestangularAll(scope.purchase)).toEqual(purchaseData());
@@ -92,10 +102,14 @@ describe('Purchases controllers', function() {
 			expect(scope.daysName).toEqual(stateParams.day);
 		});
 
-		it('should delete purchase from purchases database', function() {										
-			$httpBackend.flush();	
+		it('should delete purchase from purchases database', function() {
+			$httpBackend.flush();
+			expect(typeof scope.deletePurchase).toEqual('function');
+			console.log(scope.deletePurchase());								
+			// $httpBackend.flush();
 			scope.deletePurchase(1);
-			$httpBackend.expectDELETE('http://localhost:9001/purchase/' + stateParams.day).respond(purchaseData());			
+			$httpBackend.expect('DELETE', 'http://localhost:9001/purchase' + stateParams.id).respond(purchaseData());
+			$httpBackend.flush();		
 			console.log(sanitizeRestangularAll(scope.purchase));
 			expect(sanitizeRestangularAll(scope.purchase)).toEqual(purchaseData());
 		});
