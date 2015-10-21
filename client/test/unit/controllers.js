@@ -1,127 +1,144 @@
 describe('Purchases controllers', function() {
 
-	beforeEach(function() {
-		this.addMatchers({
-			toEqualData: function(expected) {
-				return angular.equals(this.actual, expected);
-			}
-		});
-	});
+    beforeEach(function() {
+        this.addMatchers({
+            toEqualData: function(expected) {
+                return angular.equals(this.actual, expected);
+            }
+        });
+    });
 
-	function sanitizeRestangularAll(items) {
-		var all = _.map(items, function(item) {
-			return sanitizeRestangularOne(item);
-		});
-		return sanitizeRestangularOne(all);
-	}
+    function sanitizeRestangularAll(items) {
+        var all = _.map(items, function(item) {
+            return sanitizeRestangularOne(item);
+        });
+        return sanitizeRestangularOne(all);
+    }
 
-	function sanitizeRestangularOne(item) {
-		return _.omit(item, "save", "fromServer", "oneUrl", "restangularized", "allUrl", "plain", "several", "reqParams", "clone", "withHttpConfig", "getRequestedUrl", "getParentList", "route", "parentResource", "getList", "get", "post", "put", "remove", "head", "trace", "options", "patch",
-			"$get", "$save", "$query", "$remove", "$delete", "$put", "$post", "$head", "$trace", "$options", "$patch",
-			"$then", "$resolved", "restangularCollection", "customOperation", "customGET", "customPOST",
-			"customPUT", "customDELETE", "customGETLIST", "$getList", "$resolved", "restangularCollection", "one", "all", "doGET", "doPOST",
-			"doPUT", "doDELETE", "doGETLIST", "addRestangularMethod", "getRestangularUrl");
-	}
+    function sanitizeRestangularOne(item) {
+        return _.omit(item, "save", "fromServer", "oneUrl", "restangularized", "allUrl", "plain", "several", "reqParams", "clone", "withHttpConfig", "getRequestedUrl", "getParentList", "route", "parentResource", "getList", "get", "post", "put", "remove", "head", "trace", "options", "patch",
+            "$get", "$save", "$query", "$remove", "$delete", "$put", "$post", "$head", "$trace", "$options", "$patch",
+            "$then", "$resolved", "restangularCollection", "customOperation", "customGET", "customPOST",
+            "customPUT", "customDELETE", "customGETLIST", "$getList", "$resolved", "restangularCollection", "one", "all", "doGET", "doPOST",
+            "doPUT", "doDELETE", "doGETLIST", "addRestangularMethod", "getRestangularUrl");
+    }
 
-	beforeEach(module('app'));
+    beforeEach(module('app'));
 
-	describe('dayController', function() {
-		var scope, ctrl, $httpBackend;
-		daysData = function() {
-			return [{
-				day: "Monday"
-			}, {
-				day: "Tuesday"
-			}];
-		};
+    describe('dayController', function() {
+        var scope, ctrl, $httpBackend;
+        daysData = function() {
+            return [{
+                day: "Monday"
+            }, {
+                day: "Tuesday"
+            }];
+        };
 
-		beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
-			$httpBackend = _$httpBackend_;
-			$httpBackend.expectGET('http://localhost:9001/data').respond(daysData());
-			scope = $rootScope.$new();
-			ctrl = $controller('dayController', {
-				$scope: scope
-			});
-		}));
+        beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+            $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://localhost:9001/data').respond(daysData());
+            scope = $rootScope.$new();
+            ctrl = $controller('dayController', {
+                $scope: scope
+            });
+        }));
 
-		afterEach(function() {
-			$httpBackend.verifyNoOutstandingExpectation();
-			$httpBackend.verifyNoOutstandingRequest();
-		});
+        afterEach(function() {
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        });
 
-		it('should get days from database and assign them to days', function() {
-			$httpBackend.flush();
-			expect(sanitizeRestangularAll(scope.days)).toEqual(daysData());
-		});
-	});
+        it('should get days from database and assign them to days', function() {
+            $httpBackend.flush();
+            expect(sanitizeRestangularAll(scope.days)).toEqual(daysData());
+        });
+    });
 
-	describe('purchasesController', function() {
-		var scope, ctrl, $httpBackend, state, stateParams = {
-				day: "Monday"
-			},
-			purchaseData = function() {
-				return [{
-					id: 1,
-					name: "Gift card",
-					store: "Tesco",
-					price: 4.50,
-					description: "Some text",
-					day: "Monday"
-				}, {
-					id: 2,
-					name: "Batteries",
-					store: "Walmart",
-					price: 9.99,
-					description: "Some text",
-					day: "Tuesday"
-				}];
-			};
+    describe('purchasesController', function() {
+        var scope, ctrl, $httpBackend, state, stateParams = {
+                day: "Monday"
+            },
+            purchaseData = function() {
+                return [{
+                    id: 1,
+                    name: "Gift card",
+                    store: "Tesco",
+                    price: 4.50,
+                    description: "Some text",
+                    day: "Monday"
+                }, {
+                    id: 2,
+                    name: "Batteries",
+                    store: "Walmart",
+                    price: 9.99,
+                    description: "Some text",
+                    day: "Tuesday"
+                }];
+            };
 
-		beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
-			$httpBackend = _$httpBackend_;
-			$httpBackend.expectGET('http://localhost:9001/purchase').respond(purchaseData());
-			scope = $rootScope.$new();
-			state = jasmine.createSpyObj('$state', ['go']);
-			ctrl = $controller('purchasesController', {
-				$scope: scope,
-				$stateParams: stateParams,
-				$state: state
-			});
-		}));
+        beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+            $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://localhost:9001/purchase').respond(purchaseData());
+            scope = $rootScope.$new();
+            state = jasmine.createSpyObj('$state', ['go']);
+            ctrl = $controller('purchasesController', {
+                $scope: scope,
+                $stateParams: stateParams,
+                $state: state
+            });
+        }));
 
-		afterEach(function() {
-			$httpBackend.verifyNoOutstandingExpectation();
-			$httpBackend.verifyNoOutstandingRequest();
-		});
+        afterEach(function() {
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        });
 
-		it('should get purchases from database and assign them to purchase', function() {
-			$httpBackend.flush();
-			expect(sanitizeRestangularAll(scope.purchase)).toEqual(purchaseData());
-		});
+        it('should get purchases from database and assign them to purchase', function() {
+            $httpBackend.flush();
+            expect(sanitizeRestangularAll(scope.purchase)).toEqual(purchaseData());
+        });
 
-		it('should selected day be equal to current state', function() {
-			$httpBackend.flush();
-			expect(scope.daysName).toEqual(stateParams.day);
-		});
+        it('should selected day be equal to current state', function() {
+            $httpBackend.flush();
+            expect(scope.daysName).toEqual(stateParams.day);
+        });
 
-		it('should deletePpurchase be a function and send delete request to purchases database', function() {										
-			$httpBackend.flush();
-			scope.deletePurchase(1);
-			expect(typeof scope.deletePurchase).toEqual('function');
-			$httpBackend.expectDELETE('http://localhost:9001/purchase/1').respond(purchaseData());
-		});
-	});
+        it('should deletePurchase be a function and send delete request to purchases database', function() {
+            $httpBackend.flush();
+            scope.deletePurchase(1);
+            expect(typeof scope.deletePurchase).toEqual('function');
+            $httpBackend.expectDELETE('http://localhost:9001/purchase/1').respond(202, '');
+            $httpBackend.flush();
+        });
+    });
 
-	describe('addController', function() {
-		var scope, ctrl, $httpBackend;
+    describe('addController', function() {
+        var scope, ctrl, $httpBackend, state, stateParams = {
+                day: "Monday"
+            };
+                      
+        beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+            $httpBackend = _$httpBackend_;
+            scope = $rootScope.$new();
+            ctrl = $controller('addController', {
+                $scope: scope,
+                $stateParams: stateParams,
+                $state: state
+            });  
 
-		beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, $routeParams) {
-			$httpBackend = _$httpBackend_;
-			scope = $rootScope.$new();
-			ctrl = $controller('addController', {
-				$scope: scope
-			});
-		}));
-	});
+            spyOn(scope, 'savePurchase');
+        }));
 
+
+        it('should selected day be equal to current state', function() {
+            expect(scope.daysName).toEqual(stateParams.day);
+        });
+
+        it('should savePurchase be a called and send post request to purchases database', function() {
+            scope.savePurchase();
+            expect(scope.savePurchase).toHaveBeenCalled();
+            $httpBackend.expectPOST('http://localhost:9001/purchase').respond(201, '');
+       });
+    });
 });
