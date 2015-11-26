@@ -15,7 +15,11 @@
 			}
 
 			$scope.deletePurchase = function(index) {
-				purchasesService.deletePurchase(index);
+				purchasesService.deletePurchase(index).then(function() {
+					$state.go($state.current, {}, {
+						reload: true
+					});
+				});
 			};
 		});
 	};

@@ -4,27 +4,19 @@
 	var purchasesService = function($state, Restangular) {
 
 		var getPurchases = function() {
-			return Restangular.all('purchase').getList().then(function(response) {
-				return response;
-			});
+			return Restangular.all('purchase').getList();
 		};
 
 		var addPurchase = function(data) {
-			Restangular.all('purchase').post(data).then(function() {
-					$state.go('Purchases', {}, {reload: true});		
-				});	
+			return Restangular.all('purchase').post(data);
 		};
 
 		var editPurchase = function(data) {
-			data.put().then(function() {
-					$state.go('Purchases', {}, {reload: true});	
-				});
+			return data.put();
 		};
 
 		var deletePurchase = function(index) {
-			Restangular.one('purchase', index).remove().then(function() {
-				$state.go($state.current, {}, {reload: true});
-			});
+			return Restangular.one('purchase', index).remove();
 		};
 
 		return {

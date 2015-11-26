@@ -14,12 +14,22 @@
 			}
 
 			$scope.editPurchases = function() {
-				purchasesService.editPurchase($scope.editPurchase);
+				var a = $scope.editPurchase.plain();
+				debugger;
+				purchasesService.editPurchase(a).then(function() {
+					$state.go('Purchases', {}, {
+						reload: true
+					});
+				});
 			};
 		});
 
 		$scope.deletePurchase = function() {
-			purchasesService.deletePurchase($scope.purchaseId);
+			purchasesService.deletePurchase($scope.purchaseId).then(function() {
+				$state.go($state.current, {}, {
+					reload: true
+				});
+			});
 		};
 	};
 

@@ -57,8 +57,7 @@ gulp.task('browserify', function() {
 
 gulp.task('test', function(done) {
     new Server({
-        configFile: __dirname + '/test/karma.conf.js',
-        singleRun: true
+        configFile: __dirname + '/test/karma.conf.js'
     }, done).start();
 });
 

@@ -70,7 +70,7 @@ describe('editController', function() {
     });
 
     it('should editPurchase be a function a send put request to the database', function() {
-        $httpBackend.flush();
+        $httpBackend.flush() ;
         scope.editPurchases();
         expect(typeof scope.editPurchases).toEqual('function');
         $httpBackend.expectPUT('http://localhost:9001/purchase/' + scope.purchaseId).respond(202, '');
