@@ -1,8 +1,8 @@
 (function() {
 	var app = angular.module('app');
 
-	var editController = function($scope, $state, Restangular, $stateParams) {
-		Restangular.all('purchase').getList().then(function(data) {
+	var editController = function($scope, $state, $stateParams, purchasesService) {
+		purchasesService.getPurchases().then(function(data) {
 			$scope.purchase = data;
 			$scope.purchaseId = $stateParams.index;
 
@@ -14,17 +14,13 @@
 			}
 
 			$scope.editPurchases = function() {
-				$scope.editPurchase.put().then(function() {
-					$state.go('Purchases', {}, {reload: true});	
-				});
+				purchasesService.editPurchase($scope.editPurchase);
 			};
 		});
 
 		$scope.deletePurchase = function() {
-				Restangular.one('purchase', $scope.purchaseId).remove().then(function() {
-					$state.go('Purchases', {}, {reload: true});
-				});
-			};
+			purchasesService.deletePurchase($scope.purchaseId);
+		};
 	};
 
 	app.controller("editController", editController);

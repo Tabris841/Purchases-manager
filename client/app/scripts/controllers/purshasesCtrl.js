@@ -1,8 +1,8 @@
 (function() {
 	var app = angular.module('app');
 
-	var purchasesController = function($scope, $state, Restangular, $stateParams) {
-		Restangular.all('purchase').getList().then(function(data) {
+	var purchasesController = function($scope, $state, $stateParams, purchasesService) {
+		purchasesService.getPurchases().then(function(data) {
 			$scope.purchase = data;
 			$scope.purchases = [];
 			$scope.daysName = $stateParams.day;
@@ -15,16 +15,7 @@
 			}
 
 			$scope.deletePurchase = function(index) {
-				$scope.purchaseId = index;
-				//Find the purchase with the id that we want to delete.
-				for (var i = 0; i < $scope.purchase.length; i++) {
-					if ($scope.purchaseId == $scope.purchase[i].id) {
-						$scope.purchaseToDelete = $scope.purchase[i].id;
-					}
-				}
-				Restangular.one('purchase', $scope.purchaseToDelete).remove().then(function() {
-					$state.go($state.current, {}, {reload: true});
-				});
+				purchasesService.deletePurchase(index);
 			};
 		});
 	};

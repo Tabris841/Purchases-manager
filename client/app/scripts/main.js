@@ -1,9 +1,11 @@
 (function() {
     var app = angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap']),
-        dayCtrl = require('./controllers/dayCtrl.js'),
-        purchasesCtrl = require('./controllers/purshasesCtrl.js');
-        editCtrl = require('./controllers/editCtrl.js');
-        addCtrl = require('./controllers/addCtrl.js'); 
+        dayCtrl = require('./controllers/dayCtrl'),
+        purchasesCtrl = require('./controllers/purshasesCtrl');
+        editCtrl = require('./controllers/editCtrl');
+        addCtrl = require('./controllers/addCtrl'); 
+        purchasesService = require('./services/purchaseService');
+        dayService = require('./services/dayService');
 
     app.config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
         RestangularProvider.setBaseUrl('http://localhost:9001');

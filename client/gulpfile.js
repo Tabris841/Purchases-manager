@@ -1,10 +1,11 @@
 var gulp = require('gulp'),
+    open = require('gulp-open'),
     connect = require('gulp-connect'),
     sass = require('gulp-sass'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
     browserify = require('gulp-browserify'),
-    karma = require('karma');
+    Server = require('karma').Server;
 
 gulp.task('connect', function() {
     connect.server({
@@ -17,6 +18,13 @@ gulp.task('connect', function() {
 gulp.task('html', function() {
     gulp.src('app/*.html')
         .pipe(connect.reload());
+});
+
+gulp.task('open', ['connect'], function() {
+    gulp.src('app/index.html')
+        .pipe(open({
+            uri: 'http://localhost:3000'
+        }));
 });
 
 gulp.task('sass', function() {
@@ -47,19 +55,18 @@ gulp.task('browserify', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('test', function() {
-    karma.server.start({
+gulp.task('test', function(done) {
+    new Server({
         configFile: __dirname + '/test/karma.conf.js',
-    }, function() {
-        done();
-    });
+        singleRun: true
+    }, done).start();
 });
 
 gulp.task('watch', function() {
     gulp.watch(['app/*.html', 'app/**/*.html'], ['html']);
     gulp.watch('app/styles/*.scss', ['sass']);
     gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['lint', 'browserify']);
-    gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['test']);
+    //gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['test']);
 });
 
-gulp.task('default', ['connect', 'watch', 'sass', 'browserify', 'lint', 'test']);
+gulp.task('default', ['connect', 'watch', 'sass', 'lint', 'browserify', 'open']);

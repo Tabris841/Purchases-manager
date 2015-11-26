@@ -1,8 +1,8 @@
 (function() {
 	var app = angular.module("app");
 
-	var dayController = function($scope, Restangular) {
-		Restangular.all('data').getList().then(function(data) {
+	var dayController = function($scope, dayService) {
+		dayService.getDays().then(function(data) {
 			$scope.days = data;
 		});
 
