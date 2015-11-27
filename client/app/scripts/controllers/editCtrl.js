@@ -14,9 +14,7 @@
 			}
 
 			$scope.editPurchases = function() {
-				var a = $scope.editPurchase.plain();
-				debugger;
-				purchasesService.editPurchase(a).then(function() {
+				purchasesService.editPurchase($scope.editPurchase).then(function() {
 					$state.go('Purchases', {}, {
 						reload: true
 					});
