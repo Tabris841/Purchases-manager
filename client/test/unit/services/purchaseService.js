@@ -27,12 +27,11 @@ describe('purchasesService', function() {
 		$httpBackend.flush();
 	});
 
-	// it('editPurchase should make PUT request to backend for purchase', function() {
-
-	// 	purchasesService.editPurchase();
-	// 	$httpBackend.expectPUT('http://localhost:9001/purchase').respond(202, '');	
-	// 	$httpBackend.flush();	
-	// });
+	it('editPurchase should make PUT request to backend for purchase', function() {
+		purchasesService.editPurchase({});
+		$httpBackend.expectPUT('http://localhost:9001/purchase').respond(202, '');	
+		$httpBackend.flush();	
+	});
 
 	it('deletePurchase should make DELETE request to backend for purchase', function() {
 		purchasesService.deletePurchase(1);

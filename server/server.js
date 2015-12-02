@@ -70,12 +70,12 @@ app.post('/purchase', function(req, res) {
     });
 });
 
-app.put('/purchase/:day', function(req, res) {
-  var name = req.body.name;
-  var store = req.body.store;
-  var description = req.body.description;
-  var price = req.body.price;
-  var id = req.body.id;
+app.put('/purchase*', function(req, res) {
+  var name = req.query.name;
+  var store = req.query.store;
+  var description = req.query.description;
+  var price = req.query.price;
+  var id = req.query.id;
   db.run("UPDATE Purchases SET name='" + name + "', store='" + store +
     "', description='" + description + "', price='" + price +
     "' WHERE id = " + id,

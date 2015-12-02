@@ -32,7 +32,7 @@ describe('editController', function() {
                 name: "Batteries",
                 store: "Walmart",
                 price: 9.99,
-                description: "Some text",
+                description: "text",
                 day: "Tuesday"
             }];
         };
@@ -73,7 +73,8 @@ describe('editController', function() {
         $httpBackend.flush() ;
         scope.editPurchases();
         expect(typeof scope.editPurchases).toEqual('function');
-        $httpBackend.expectPUT('http://localhost:9001/purchase/' + scope.purchaseId).respond(202, '');
+        var data = purchaseData();
+        $httpBackend.expectPUT('http://localhost:9001/purchase?day=' + data[1].day + '&description=' + data[1].description + '&id=' + data[1].id + '&name=' + data[1].name + '&price=' +data[1].price +'&store=' + data[1].store).respond(202, '');
         $httpBackend.flush();
     });
 });
